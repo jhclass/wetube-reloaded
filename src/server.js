@@ -8,7 +8,9 @@ import userRounter from "./routers/userRouter";
 const port = 4000;
 const app = express();
 const logger = morgan("dev");
-
+app.disable('x-powered-by');
+app.set('view engine','pug');
+app.set('views', process.cwd()+"/src/views");
 app.use(logger);
 
 app.use("/",globalRouter);

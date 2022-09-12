@@ -1,4 +1,6 @@
-export const trending = (req,res)=>res.send("homepage videos!");
+export const trending = (req,res)=>{
+  res.render('index');
+};
 
 export const see = (req,res) =>{
   console.log(req.params);
