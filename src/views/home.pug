@@ -1,4 +1,11 @@
 extends base.pug
+include mixins/video
 
 block content 
     h2 Welcome here you will see the trending videos!
+    each potato in videos
+        +video(potato)  
+    else 
+        div 
+            h4 죄송합니다. 비디오를 찾을 수 없습니다. 
+        
