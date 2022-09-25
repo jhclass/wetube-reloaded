@@ -2,7 +2,9 @@ doctype html
 html(lang="ko")
     head
         title #{pageTitle} | JHTUBE
-
+        link(rel="stylesheet" href="https://unpkg.com/mvp.css@1.11/mvp.css")
     body 
-        block content
-        include partials/footer.pug
+        main
+            block content
+            input(placeholder="입력하세요")
+            include partials/footer.pug
