@@ -1,0 +1,7 @@
+extends base.pug
+
+block content 
+    h3 hello from upload! 
+    form(method="post")
+        input(placeholder="영상의 제목을 입력하세요." name="title" required, type="text")
+        input(type="submit" value="Upload Video")
