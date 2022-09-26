@@ -39,7 +39,21 @@ export const watch = (req,res) => {
   res.render('watch',{pageTitle:`Watch ${video.title}`,video});
 }
 
-export const edit = (req,res) => res.render("Edit");
+export const getEdit = (req,res) => {
+  
+  const {id} = req.params;
+  const video = videos[id-1];
+  //console.log(id);
+  res.render("Edit",{pageTitle:`Editing ${video.title}`,video});
+
+};
+export const postEdit = (req,res)=>{
+  const {id} = req.params;
+  console.log(req.body.title);
+  const {title} = req.body;
+  videos[id-1].title=title;
+  return res.redirect(`/videos/${id}`);
+};
 
 export const search = (req,res) => res.send("Search!");
 

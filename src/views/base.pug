@@ -1,6 +1,7 @@
 doctype html 
 html(lang="ko")
     head
+        meta(name='viewport', content='width=device-width, initial-scale=1')
         title #{pageTitle} | JHTUBE
         link(rel="stylesheet" href="https://unpkg.com/mvp.css@1.11/mvp.css")
     body 
@@ -8,5 +9,4 @@ html(lang="ko")
             h1=pageTitle
         main
             block content
-            input(placeholder="입력하세요")
             include partials/footer
