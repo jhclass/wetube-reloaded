@@ -57,8 +57,6 @@ export const postEdit = (req,res)=>{
 
 export const search = (req,res) => res.send("Search!");
 
-
-
 export const deleteVideo = (req,res) => res.send("deleteVideo");
 
 //비디오 업로드
