@@ -14,9 +14,12 @@ export const home = async(req,res)=>{
  
 };
 
-export const watch = (req,res) => {
+export const watch = async(req,res) => {
   const {id} = req.params;
-  res.render('watch',{pageTitle:`Watch`});
+  const video = await Video.findById(id);
+  console.log('비디오',video);
+
+  res.render('watch',{pageTitle:`Watch`,video});
 }
 
 export const getEdit = (req,res) => {
@@ -49,12 +52,9 @@ export const postUpload = async(req,res)=>{
   await Video.create({
     title,
     description,
-    /*createdAt: Date.now(),*/
+    /*createdAt: Date.now(), 스키마에 디폴드로 작성하였기 때문에*/
     hashtags: hashtags.split(",").map((word)=>`#${word}`),
-    meta: {
-      views: 0,
-      rating: 0,
-    },
+    
   });
  
   return res.redirect("/");
