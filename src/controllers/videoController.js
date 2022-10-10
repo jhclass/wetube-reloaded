@@ -42,12 +42,14 @@ export const getUpload = (req,res)=>{
 }
 
 export const postUpload = async(req,res)=>{
-  // here we will add a video to the videos array
   const {title, description, hashtags} = req.body;
+  try{
+  // here we will add a video to the videos array
+
   await Video.create({
     title,
     description,
-    createAt: Date.now(),
+    /*createdAt: Date.now(),*/
     hashtags: hashtags.split(",").map((word)=>`#${word}`),
     meta: {
       views: 0,
@@ -56,4 +58,10 @@ export const postUpload = async(req,res)=>{
   });
  
   return res.redirect("/");
+}catch(err){
+ //console.log('에러발생',err);
+  return res.render("upload",{oageTitle:"upload Video",errorMessage: err._message});
+  
+}
+
 }

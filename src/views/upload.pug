@@ -1,6 +1,9 @@
 extends base.pug
 
 block content 
+    if errorMessage   
+        //- 추후에 alert 로 사용하면 좋을듯?
+        h2(style={color:'red'})=errorMessage 
     h3 hello from upload! 
     form(method="post")
         input(placeholder="영상의 제목을 입력하세요." name="title" required, type="text")
