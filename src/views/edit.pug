@@ -4,4 +4,6 @@ block content
     h4 Change Title of video.
     form(method="post")
         input(name="title",placeholder=video.title,value=video.title,required)
+        input(placeholder="영상의 설명을 간략하게 작성하세요" name="description" required, type="text", minlength=20, value=video.description )
+        input(placeholder="해시태그를 ,이용하여 작성하여 주세요." name="hashtags" required, type="text", value=video.hashtags.join())
         input(value="저장",type="submit")

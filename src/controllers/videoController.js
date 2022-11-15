@@ -17,15 +17,22 @@ export const home = async(req,res)=>{
 export const watch = async(req,res) => {
   const {id} = req.params;
   const video = await Video.findById(id);
-  console.log('비디오',video);
+  if(!video){
+    return res.render('404',{pageTitle:"Video not found."});
+  }
+  
+  return res.render('watch',{pageTitle:video.title,video});
 
-  res.render('watch',{pageTitle:`Watch`,video});
-}
+};
 
-export const getEdit = (req,res) => {
+export const getEdit = async(req,res) => {
   const {id} = req.params;
+  const video = await Video.findById(id);
   //console.log(id);
-  res.render("edit",{pageTitle:`Editing`});
+  if (!video){
+  return res.render("404",{pageTitle:"Video not found."});  
+  }
+  res.render("edit",{pageTitle:`Editing ${video.title}`,video});
 };
 
 export const postEdit = (req,res)=>{
