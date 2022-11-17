@@ -43,7 +43,7 @@ export const postEdit = async(req,res)=>{
     return res.render("404",{pageTitle:"Video not found."});  
   }
   await Video.findByIdAndUpdate(id,{
-    title,description,hashtags:hashtags.split(",").map((word)=> word.startsWith("#") ?  word : `#${word}`)
+    title,description,hashtags
   });
   
   // await video.save(); 이거 때문에 304 뜨네
@@ -67,7 +67,7 @@ export const postUpload = async(req,res)=>{
     title,
     description,
     /*createdAt: Date.now(), 스키마에 디폴드로 작성하였기 때문에*/
-    hashtags: hashtags.split(",").map((word)=>`#${word}`),
+    hashtags,
     
   });
  
