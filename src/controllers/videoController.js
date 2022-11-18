@@ -46,11 +46,11 @@ export const postEdit = async(req,res)=>{
     title,description,hashtags:Video.formatHashtags(hashtags)
   });
   
-  // await video.save(); 이거 때문에 304 뜨네
   return res.redirect(`/videos/${id}`);
 };
 
 export const search = (req,res) => res.send("Search!");
+
 //비디오삭제
 export const deleteVideo = async (req,res) => {
   const {id} = req.params;
@@ -64,6 +64,7 @@ export const deleteVideo = async (req,res) => {
 export const getUpload = (req,res)=>{
   return res.render('upload',{pageTitle:"Upload Video!"});
 }
+
 
 export const postUpload = async(req,res)=>{
   const {title, description, hashtags} = req.body;
