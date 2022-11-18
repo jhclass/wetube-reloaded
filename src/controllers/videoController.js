@@ -51,7 +51,14 @@ export const postEdit = async(req,res)=>{
 };
 
 export const search = (req,res) => res.send("Search!");
-export const deleteVideo = (req,res) => res.send("deleteVideo");
+//비디오삭제
+export const deleteVideo = async (req,res) => {
+  const {id} = req.params;
+  await Video.findByIdAndDelete(id);
+  console.log(id);
+  //delete video
+  return res.redirect("/");
+}
 
 //비디오 업로드
 export const getUpload = (req,res)=>{
@@ -72,10 +79,10 @@ export const postUpload = async(req,res)=>{
   });
  
   return res.redirect("/");
-}catch(err){
- //console.log('에러발생',err);
-  return res.render("upload",{oageTitle:"upload Video",errorMessage: err._message});
-  
-}
+  }catch(err){
+  //console.log('에러발생',err);
+    return res.render("upload",{oageTitle:"upload Video",errorMessage: err._message});
+    
+  }
 
 }
