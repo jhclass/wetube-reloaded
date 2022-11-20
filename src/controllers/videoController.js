@@ -3,7 +3,7 @@ import Video from "../models/Video";
 export const home = async(req,res)=>{
   try{
     console.log("i Started");
-    const videos = await Video.find({});
+    const videos = await Video.find({}).sort({createdAt:"desc"});
     console.log(videos)
     console.log("i finish")
     
@@ -49,7 +49,20 @@ export const postEdit = async(req,res)=>{
   return res.redirect(`/videos/${id}`);
 };
 
-export const search = (req,res) => res.send("Search!");
+//비디오검색
+export const search = async (req,res) => {
+  const {keyword} = req.query;
+  console.log("should search for", keyword);
+  let videos = [];
+  if(keyword){
+    videos = await Video.find({
+      title: {
+        $regex: new RegExp(keyword,"i"),
+      },
+    });
+  }
+ return res.render("search",{pageTitle:"search",videos});
+}
 
 //비디오삭제
 export const deleteVideo = async (req,res) => {
