@@ -19,7 +19,7 @@ export const postJoin = async (req,res) => {
    if (usernameExists){
     return res.status(400).render("join",{
         pageTitle,
-        errorMessage:"지금 사용중인 아이디는 사용할 수 없습니다."
+        errorMessage:"이 아이디는 사용할 수 없습니다."
     }); 
    }
    const useremailExists = await User.exists({email});
