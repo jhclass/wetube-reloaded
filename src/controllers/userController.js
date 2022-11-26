@@ -53,8 +53,23 @@ export const edit = (req,res) => res.send("EditUser");
 
 export const remove = (req,res) => res.send("Remove User!");
 
-export const login = (req,res) => res.send("Login");
-
+//로그인페이지
+export const getLogin = (req,res) => {
+    return res.render("login",{pageTitle:"Login"});
+}
+export const postLogin = async (req,res)=>{
+    const {username,password} = req.body;
+    //계정이 존재하는지 체크
+    const exist = await User.exists({username});
+    if(!exist){
+        return res.status(400).render("login",{
+            pageTitle:"Login",
+            errorMessage: "아이디를 다시 확인하여주세요."
+        });
+    }
+    //패스워드가 일치하는지 체크
+    return res.end();
+}
 export const logout = (req,res) => res.send("logout");
 
 export const see = (req,res) => res.send("see");
