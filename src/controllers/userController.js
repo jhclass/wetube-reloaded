@@ -28,13 +28,23 @@ export const postJoin = async (req,res) => {
         errorMessage:"지금 사용중인 이메일은 사용할 수 없습니다."
     }); 
    }
-   await User.create({
-    name, 
-    username, 
-    email, 
-    password, 
-    location
-   });
+  
+   try {
+    await User.create({
+        name, 
+        username, 
+        email, 
+        password, 
+        location
+       });
+   } catch(err){
+    //console.log('에러발생',err);
+      return res.render("join",{
+        pageTitle:"Join",
+        errorMessage: err._message
+        });
+      
+    }
    return res.redirect('/login');
 
 }

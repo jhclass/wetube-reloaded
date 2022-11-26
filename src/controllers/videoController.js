@@ -95,7 +95,9 @@ export const postUpload = async(req,res)=>{
   return res.redirect("/");
   }catch(err){
   //console.log('에러발생',err);
-    return res.render("upload",{oageTitle:"upload Video",errorMessage: err._message});
+    return res.render("upload",{
+      pageTitle:"upload Video",errorMessage: err._message
+    });
     
   }
 
