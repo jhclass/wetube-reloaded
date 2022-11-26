@@ -78,7 +78,7 @@ export const postLogin = async (req,res)=>{
             errorMessage: "비밀번호를 다시 확인하여주세요."
         });
     }
-    return res.redirect("/
+    return res.redirect("/");
 }
 export const logout = (req,res) => res.send("logout");
 
