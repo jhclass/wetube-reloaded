@@ -8,7 +8,7 @@ export const postJoin = async (req,res) => {
     const {name, username, email, password, password2, location} = req.body;
     const pageTitle = "join"
     if(password !== password2) {
-        return res.render("join",{
+        return res.status(400).render("join",{
             pageTitle,
             errorMessage:"비밀번호가 서로 일치하지 않습니다."
         });
@@ -16,14 +16,14 @@ export const postJoin = async (req,res) => {
 
    const usernameExists = await User.exists({username});
    if (usernameExists){
-    return res.render("join",{
+    return res.status(400).render("join",{
         pageTitle,
         errorMessage:"지금 사용중인 아이디는 사용할 수 없습니다."
     }); 
    }
    const useremailExists = await User.exists({email});
    if (useremailExists){
-    return res.render("join",{
+    return res.status(400).render("join",{
         pageTitle,
         errorMessage:"지금 사용중인 이메일은 사용할 수 없습니다."
     }); 
