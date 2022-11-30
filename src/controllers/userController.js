@@ -78,6 +78,8 @@ export const postLogin = async (req,res)=>{
             errorMessage: "비밀번호를 다시 확인하여주세요."
         });
     }
+    req.session.loggedIn = true; //loggedIn 이 true 로 바뀌고
+    req.session.user = user; //user에는 User 에 서 가저온 user 정보를 담아
     return res.redirect("/");
 }
 export const logout = (req,res) => res.send("logout");
