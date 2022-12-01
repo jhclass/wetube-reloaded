@@ -2,10 +2,10 @@ import Video from "../models/Video";
 
 export const home = async(req,res)=>{
   try{
-    console.log("i Started");
+   // console.log("i Started");
     const videos = await Video.find({}).sort({createdAt:"desc"});
-    console.log(videos)
-    console.log("i finish")
+  //  console.log(videos)
+   // console.log("i finish")
     
     return res.render('home',{pageTitle:"HOME",videos});
   }catch(err){
