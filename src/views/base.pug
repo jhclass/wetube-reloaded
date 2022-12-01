@@ -18,6 +18,8 @@ html(lang="ko")
                     if loggedIn
                         li 
                             a(href="/logout") Logout
+                        li 
+                            a(href="/my-profile") #{loggedInUser.name}의 Profile    
                         
                     else 
                         li 
