@@ -34,7 +34,9 @@ app.get("/add-one",(req,res,next)=>{
     res.locals.sexy = "you";
     // add-one 페이지에 세션아이디와 세션안에 생성한 포테이토에 +=1 하여 브라우저마다 세션이 다르게 적용되고 있다는 것을 확인
     req.session.potato += 1;
+    console.log(res);
     return res.send(`${req.session.id}\n${req.session.potato}`);
+    
 });
 
 //쿠키를 제대로 요구req 하는지
