@@ -2,10 +2,11 @@
 import express from "express";
 import morgan from "morgan";
 import session from "express-session";
-import { localsMiddleware } from "./middlewares";
+import MongoStore from "connect-mongo";
 import rootRouter from "./routers/rootRouter";
 import videoRouter from "./routers/videoRouter";
 import userRounter from "./routers/userRouter";
+import { localsMiddleware } from "./middlewares";
 
 
 
@@ -21,6 +22,7 @@ app.use( //세션선언
         secret:"hello!",
         resave:true,
         saveUninitialized:true,
+        store:MongoStore.create({mongoUrl:"mongodb://127.0.0.1:27017/wetube"})
     })
 );
 app.use((req,res,next)=>{ //세션스토어에 담겨있는 내용을 console.log
