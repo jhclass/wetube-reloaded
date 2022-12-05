@@ -20,8 +20,8 @@ app.use(express.urlencoded({extended:true}));
 app.use( //세션선언
     session({
         secret:"hello!",
-        resave:true,
-        saveUninitialized:true,
+        resave:false, //모든 방문자에게 쿠키를 부여 (true)
+        saveUninitialized:false, //모든 방문자에게 쿠키를 부여 (true)
         store:MongoStore.create({mongoUrl:"mongodb://127.0.0.1:27017/wetube"})
     })
 );
