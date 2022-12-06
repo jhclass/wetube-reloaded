@@ -19,13 +19,13 @@ app.use(logger);
 app.use(express.urlencoded({extended:true}));
 app.use( //세션선언
     session({
-        secret:"hello!",
+        secret:process.env.COOKIE_SECRET,
         resave:false, //모든 방문자에게 쿠키를 부여 (true)
         saveUninitialized:false, //모든 방문자에게 쿠키를 부여 (true)
         // cookie: {
         //     maxAge:20000
         // },
-        store:MongoStore.create({mongoUrl:"mongodb://127.0.0.1:27017/wetube"})
+        store:MongoStore.create({mongoUrl:process.env.DB_URL})
     })
 );
 app.use((req,res,next)=>{ //세션스토어에 담겨있는 내용을 console.log
