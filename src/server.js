@@ -22,6 +22,9 @@ app.use( //세션선언
         secret:"hello!",
         resave:false, //모든 방문자에게 쿠키를 부여 (true)
         saveUninitialized:false, //모든 방문자에게 쿠키를 부여 (true)
+        // cookie: {
+        //     maxAge:20000
+        // },
         store:MongoStore.create({mongoUrl:"mongodb://127.0.0.1:27017/wetube"})
     })
 );
