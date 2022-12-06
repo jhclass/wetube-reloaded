@@ -8,8 +8,6 @@ import videoRouter from "./routers/videoRouter";
 import userRounter from "./routers/userRouter";
 import { localsMiddleware } from "./middlewares";
 
-
-
 const app = express();
 const logger = morgan("dev");
 app.disable('x-powered-by');
