@@ -50,6 +50,23 @@ export const postJoin = async (req,res) => {
 
 }
 
+export const startGithubLogin = (req,res) => {
+    //https://github.com/login/oauth/authorize?client_id=24ed007013090a3ca5b3&allow_signup=false&scope=user:email
+    const baseUrl = `https://github.com/login/oauth/authorize`;
+    const config = {
+        client_id: "24ed007013090a3ca5b3",
+        allow_signup: false,
+        scope:"read:user user:email"
+    }
+    const params = new URLSearchParams(config).toString();
+    const finalUrl = `${baseUrl}?${[params]}`; 
+    return res.redirect(finalUrl);
+}
+
+export const finishGithubLogin = (req,res) => {
+
+}
+
 export const edit = (req,res) => res.send("EditUser");
 
 export const remove = (req,res) => res.send("Remove User!");
