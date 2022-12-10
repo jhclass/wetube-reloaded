@@ -60,7 +60,7 @@ export const startGithubLogin = (req,res) => {
         scope:"read:user user:email"
     }
     const params = new URLSearchParams(config).toString();
-    const finalUrl = `${baseUrl}?${[params]}`; 
+    const finalUrl = `${baseUrl}?${params}`; 
     return res.redirect(finalUrl);
 }
 
@@ -76,12 +76,14 @@ export const finishGithubLogin = async (req,res) => {
     const params = new URLSearchParams(config).toString();
     const finalUrl = `${baseUrl}?${params}`;
     
-    const tokenRequest = await(await fetch(finalUrl,{
-        method:"POST",
-        headers:{
-            Accept:"application/json"
-        }
-    })).json();
+    const tokenRequest = await(
+        await fetch(finalUrl,{
+            method:"POST",
+            headers:{
+                Accept:"application/json",
+            },
+        })
+    ).json();
     //const json = await data.json();
     console.log(tokenRequest);
     //res.send(JSON.stringify(json));
@@ -99,7 +101,6 @@ export const finishGithubLogin = async (req,res) => {
     }else{
         return res.redirect("/login");
     }
-
 
 }
 
