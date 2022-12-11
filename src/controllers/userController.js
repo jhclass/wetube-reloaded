@@ -93,7 +93,7 @@ export const finishGithubLogin = async (req,res) => {
         const userRequest = await(
             await fetch("https://api.github.com/user",{
                 headers: {
-                    Autorization:`token ${access_token}`,
+                    Authorization:`token ${access_token}`,
                 },
             })
         ).json();
