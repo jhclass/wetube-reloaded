@@ -106,13 +106,15 @@ export const finishGithubLogin = async (req,res) => {
                 },
             })
         ).json();
+        console.log(emailData);
         const email = emailData.find(
             (email)=>email.primary === true && email.verified === true
         );
+        console.log('조건을 만족하는 email',email);
         if(!email){
             return res.redirect("/login");
         }
-        
+
     }else{
         return res.redirect("/login");
     }
