@@ -107,14 +107,32 @@ export const finishGithubLogin = async (req,res) => {
             })
         ).json();
         console.log(emailData);
-        const email = emailData.find(
+        const emailObj = emailData.find(
             (email)=>email.primary === true && email.verified === true
         );
-        console.log('조건을 만족하는 email',email);
-        if(!email){
+        console.log('조건을 만족하는 email0',emailObj);
+        if(!emailObj){
             return res.redirect("/login");
         }
-
+        const exitingUser = await User.findOne({email: emailObj.email});
+        if(exitingUser){
+            req.session.loggedIn = true; //loggedIn 이 true 로 바뀌고
+            req.session.user = exitingUser; //user에는 User 에 서 가저온 user 정보를 담아
+            return res.redirect("/");
+        }else{
+          //  계정생성
+          //console.log('계정을 생성합니다.');
+          const user = await User.create({
+            name:userData.name,
+            username:userData.login,
+            email:emailObj.email,
+            password:"",
+            socialOnly:true,
+            location:userData.location,
+          });
+          req.session.loggedIn = true; //loggedIn 이 true 로 바뀌고
+          req.session.user = user; //user에는 User 에 서 가저온 user 정보를 담아
+        }
     }else{
         return res.redirect("/login");
     }
