@@ -170,6 +170,9 @@ export const postLogin = async (req,res)=>{
     req.session.user = user; //user에는 User 에 서 가저온 user 정보를 담아
     return res.redirect("/");
 }
-export const logout = (req,res) => res.send("logout");
+export const logout = (req,res) => {
+    req.session.destroy();
+    return res.redirect('/');
+}
 
 export const see = (req,res) => res.send("see");
