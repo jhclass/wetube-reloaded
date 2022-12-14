@@ -114,12 +114,9 @@ export const finishGithubLogin = async (req,res) => {
         if(!emailObj){
             return res.redirect("/login");
         }
-        const exitingUser = await User.findOne({email: emailObj.email});
-        if(exitingUser){
-            req.session.loggedIn = true; //loggedIn 이 true 로 바뀌고
-            req.session.user = exitingUser; //user에는 User 에 서 가저온 user 정보를 담아
-            return res.redirect("/");
-        }else{
+        let user = await User.findOne({email: emailObj.email});
+        if(!user){
+        
           //  계정생성
           //console.log('계정을 생성합니다.');
           const user = await User.create({
@@ -130,13 +127,14 @@ export const finishGithubLogin = async (req,res) => {
             socialOnly:true,
             location:userData.location,
           });
-          req.session.loggedIn = true; //loggedIn 이 true 로 바뀌고
-          req.session.user = user; //user에는 User 에 서 가저온 user 정보를 담아
+       
         }
+        req.session.loggedIn = true; //loggedIn 이 true 로 바뀌고
+        req.session.user = user; //user에는 User 에 서 가저온 user 정보를 담아
+        return res.redirect("/");
     }else{
         return res.redirect("/login");
     }
-
 }
 
 export const edit = (req,res) => res.send("EditUser");
