@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 //하지만 지금 각각의 unipue 를 검증하고 에러메세지를 보낼 예정.
 const userSchema = new mongoose.Schema({
     email:{type:String, required:true, unique:true},
+    avatarUrl: String,
     socialOnly:{type:Boolean,dafault:false},
     username:{type:String, required:true, unique:true},
     password:{type:String},

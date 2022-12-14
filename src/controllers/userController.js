@@ -120,6 +120,7 @@ export const finishGithubLogin = async (req,res) => {
           //  계정생성
           //console.log('계정을 생성합니다.');
           const user = await User.create({
+            avatarUrl: userData.avatar_url,
             name:userData.name,
             username:userData.login,
             email:emailObj.email,
