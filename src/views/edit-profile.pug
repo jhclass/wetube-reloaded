@@ -1,0 +1,9 @@
+extends base
+
+block content
+    form(method="POST")
+        input(placeholder="이름을 작성하여 주세요", name="name", type="text", required, value=loggedInUser.name)
+        input(placeholder="이메일을 작성하여 주세요", name="email", type="email", required,value=loggedInUser.email)
+        input(placeholder="아이디를 입력하여 주세요", name="username", type="text", required,value=loggedInUser.username)
+        input(placeholder="사는 곳을 입력하여 주세요", name="location", type="text", required,value=loggedInUser.location)
+        input(type="submit", value="Update")

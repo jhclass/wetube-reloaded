@@ -174,5 +174,11 @@ export const logout = (req,res) => {
     req.session.destroy();
     return res.redirect('/');
 }
-
+//User Profile 수정.
+export const getEdit = (req,res)=>{
+    return res.render("edit-profile",{pageTitle:"Edit Profile"});
+}
+export const postEdit = (req,res) => {
+    console.log('postEdit');
+}
 export const see = (req,res) => res.send("see");
