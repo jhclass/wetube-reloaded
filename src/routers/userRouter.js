@@ -1,15 +1,15 @@
 import express from "express";
 import { remove,getEdit,postEdit,logout,see,startGithubLogin, finishGithubLogin } from "../controllers/userController";
+import { protectorMiddleware, publicOnlyMiddleware } from "../middlewares";
 const userRounter = express.Router();
 //const handleEdit = (req,res)=>res.send("Edit Users!");
 //const handleDelete = (req,res)=>res.send("Delete Users!");
 // use(/user) 라는 것을 기억하자  경로는 /users/github/start 가 되는것 
-userRounter.get("/logout",logout);
-userRounter.route("/edit").get(getEdit).post(postEdit);
+userRounter.get("/logout",protectorMiddleware,logout);
+userRounter.route("/edit").all(protectorMiddleware).get(getEdit).post(postEdit);
 userRounter.get("/remove",remove);
-userRounter.get("/github/start", startGithubLogin);//가장아래로 내려도 순서는 의미없음.!
-userRounter.get("/github/finish", finishGithubLogin);
-
+userRounter.get("/github/start",publicOnlyMiddleware, startGithubLogin);//가장아래로 내려도 순서는 의미없음.!
+userRounter.get("/github/finish",publicOnlyMiddleware, finishGithubLogin);
 userRounter.get(":id",see);
 
 
