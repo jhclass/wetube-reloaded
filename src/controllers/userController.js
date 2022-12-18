@@ -6,7 +6,7 @@ export const getJoin = (req,res) => {
     return res.render("join",{pageTitle:"Join"});
 }
 export const postJoin = async (req,res) => {
-    console.log(req.body);
+    //console.log(req.body);
     const {name, username, email, password, password2, location} = req.body;
     const pageTitle = "join"
     if(password !== password2) {
@@ -178,7 +178,30 @@ export const logout = (req,res) => {
 export const getEdit = (req,res)=>{
     return res.render("edit-profile",{pageTitle:"Edit Profile"});
 }
-export const postEdit = (req,res) => {
-    console.log('postEdit');
+export const postEdit = async (req,res) => {
+    const {session:{
+            user:{_id},
+            },
+            body : { name, email, username, location },
+        } = req;
+  
+    
+    const updateUser = await User.findByIdAndUpdate(_id,{
+        name,email,username,location
+    },{new:true});
+    
+    req.session.user = updateUser;
+    //업데이트가 되지 않는다. 왜? DB에는 적용이 되었으나, 현재 session 이 업데이트 되지 않았으므로
+    // 방법 1.
+    // req.session.user = {
+    //     ...req.session.user,
+    //     name,
+    //     email,
+    //     username,
+    //     location,
+    // }
+    // 방법2.
+    
+    return res.redirect("/users/edit");
 }
 export const see = (req,res) => res.send("see");

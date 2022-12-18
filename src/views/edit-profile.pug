@@ -1,6 +1,8 @@
 extends base
 
 block content
+    if errorMessage     
+        span(style="color:red;font-weight:bold")=errorMessage
     form(method="POST")
         input(placeholder="이름을 작성하여 주세요", name="name", type="text", required, value=loggedInUser.name)
         input(placeholder="이메일을 작성하여 주세요", name="email", type="email", required,value=loggedInUser.email)
