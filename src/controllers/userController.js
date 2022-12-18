@@ -185,7 +185,13 @@ export const postEdit = async (req,res) => {
             body : { name, email, username, location },
         } = req;
   
-    
+    const useremailExists = await User.exists({email});
+    if (useremailExists){
+     return res.status(400).render("edit-profile",{
+        
+         errorMessage:"지금 작성한 이메일은 사용할수 없습니다."
+     }); 
+    }
     const updateUser = await User.findByIdAndUpdate(_id,{
         name,email,username,location
     },{new:true});
