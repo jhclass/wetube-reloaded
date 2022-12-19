@@ -187,15 +187,15 @@ export const postEdit = async (req,res) => {
   
     const useremailExists = await User.exists({email});
     if (useremailExists){
-     return res.status(400).render("edit-profile",{
+        return res.status(400).render("edit-profile",{
         
-         errorMessage:"지금 작성한 이메일은 사용할수 없습니다."
-     }); 
+            errorMessage:"지금 작성한 이메일은 사용할수 없습니다."
+        }); 
     }
     const updateUser = await User.findByIdAndUpdate(_id,{
         name,email,username,location
     },{new:true});
-    
+     
     req.session.user = updateUser;
     //업데이트가 되지 않는다. 왜? DB에는 적용이 되었으나, 현재 session 이 업데이트 되지 않았으므로
     // 방법 1.
@@ -209,5 +209,12 @@ export const postEdit = async (req,res) => {
     // 방법2.
     
     return res.redirect("/users/edit");
+}
+export const getChangePassword = (req,res) => {
+    return res.render("users/chage-password",{pageTitle:"Change Password"});
+}
+export const postChangePassword = (req,res) => {
+    //send notification
+    return res.redirect("/");
 }
 export const see = (req,res) => res.send("see");
