@@ -4,10 +4,14 @@ block content
     if errorMessage     
         span(style="color:red;font-weight:bold")=errorMessage
     form(method="POST")
-        input(placeholder="이름을 작성하여 주세요", name="name", type="text", required, value=loggedInUser.name)
-        input(placeholder="이메일을 작성하여 주세요", name="email", type="email", required,value=loggedInUser.email)
-        input(placeholder="아이디를 입력하여 주세요", name="username", type="text", required,value=loggedInUser.username)
-        input(placeholder="사는 곳을 입력하여 주세요", name="location", type="text", required,value=loggedInUser.location)
-        input(type="submit", value="Update")
-        hr
-        a(href="/users/change-password") Change Password &rarr;
+        if !loggedInUser.socialOnly
+            input(placeholder="이름을 작성하여 주세요", name="name", type="text", required, value=loggedInUser.name)
+            input(placeholder="이메일을 작성하여 주세요", name="email", type="email", required,value=loggedInUser.email)
+            input(placeholder="아이디를 입력하여 주세요", name="username", type="text", required,value=loggedInUser.username)
+            input(placeholder="사는 곳을 입력하여 주세요", name="location", type="text", required,value=loggedInUser.location)
+            input(type="submit", value="Update")
+        else 
+           span SNS 로그인을 하였을 경우에는 해당 SNS 계정에서 정보를 수정하시기 바랍니다.
+        if !loggedInUser.socialOnly
+            hr
+            a(href="/users/change-password") Change Password &rarr;
