@@ -211,6 +211,9 @@ export const postEdit = async (req,res) => {
     return res.redirect("/users/edit");
 }
 export const getChangePassword = (req,res) => {
+    if(req.session.user.socialOnly===true){ // sns 로그인을 했을 경우 비밀번호 변경을 못하게 한다.
+        return res.redirect("/");
+    }
     return res.render("./users/change-password",{pageTitle:"Change Password"});
 }
 export const postChangePassword = (req,res) => {
