@@ -211,13 +211,26 @@ export const postEdit = async (req,res) => {
     return res.redirect("/users/edit");
 }
 export const getChangePassword = (req,res) => {
-    if(req.session.user.socialOnly===true){ // sns 로그인을 했을 경우 비밀번호 변경을 못하게 한다.
-        return res.redirect("/");
-    }
+    // if(req.session.user.socialOnly===true){ // sns 로그인을 했을 경우 비밀번호 변경을 못하게 한다.
+    //     return res.redirect("/");
+    // }
     return res.render("./users/change-password",{pageTitle:"Change Password"});
 }
-export const postChangePassword = (req,res) => {
+export const postChangePassword = async (req,res) => {
     //send notification
+    const {session:{
+        user:{_id},
+        },
+        body : { oldPassword, newPassword, newPasswordConfirmation },
+    } = req;
+    if(newPassword !== newPasswordConfirmation) {
+    
+        return res.render("users/change-password",{
+            pageTitle:"Change Password",
+            errorMessage: "The password does not match the confirmation"
+        })
+    }
+   
     return res.redirect("/");
 }
 export const see = (req,res) => res.send("see");
