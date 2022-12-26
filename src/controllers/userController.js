@@ -2,6 +2,7 @@ import User from "../models/User";
 import fetch from "node-fetch";
 import bcrypt from "bcrypt";
 
+
 export const getJoin = (req,res) => {
     return res.render("join",{pageTitle:"Join"});
 }
@@ -182,9 +183,11 @@ export const postEdit = async (req,res) => {
     const {session:{
             user:{_id},
             },
-            body : { name, email, username, location },
+            body : { name, email, username, location },file
+           
         } = req;
-  
+        console.log(file);
+    
     const useremailExists = await User.exists({email});
     if (useremailExists){
         return res.status(400).render("edit-profile",{
