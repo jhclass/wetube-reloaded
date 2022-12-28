@@ -1,5 +1,5 @@
 import mongoose, { mongo } from "mongoose";
-console.log(process.env.COOKIE_SECRET,process.env.DB_URL); //출력됨!ㅎㅎ
+//console.log(process.env.COOKIE_SECRET,process.env.DB_URL); //출력됨!ㅎㅎ
 mongoose.connect(process.env.DB_URL);
 
 const db = mongoose.connection;

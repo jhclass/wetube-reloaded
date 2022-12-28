@@ -86,7 +86,7 @@ export const finishGithubLogin = async (req,res) => {
         })
     ).json();
     //const json = await data.json();
-    console.log(tokenRequest);
+    //console.log(tokenRequest);
     //res.send(JSON.stringify(json));
     if("access_token" in tokenRequest){
         //access api
@@ -99,7 +99,7 @@ export const finishGithubLogin = async (req,res) => {
                 },
             })
         ).json();
-        console.log(userData);
+        //console.log(userData);
         const emailData = await (
             await fetch(`${apiUrl}/user/emails`,{
                 headers: {
@@ -107,11 +107,11 @@ export const finishGithubLogin = async (req,res) => {
                 },
             })
         ).json();
-        console.log(emailData);
+        //console.log(emailData);
         const emailObj = emailData.find(
             (email)=>email.primary === true && email.verified === true
         );
-        console.log('조건을 만족하는 email0',emailObj);
+        //console.log('조건을 만족하는 email0',emailObj);
         if(!emailObj){
             return res.redirect("/login");
         }
@@ -181,7 +181,7 @@ export const getEdit = (req,res)=>{
 }
 export const postEdit = async (req,res) => {
     const {session:{
-            user:{_id},
+            user:{_id, avatarUrl},
             },
             body : { name, email, username, location },file
            
@@ -196,10 +196,16 @@ export const postEdit = async (req,res) => {
         }); 
     }
     const updateUser = await User.findByIdAndUpdate(_id,{
-        name,email,username,location
-    },{new:true});
+        avatarUrl:file ? `/${file.path}` : avatarUrl,
+        name,
+        email,
+        username,
+        location
+    },
+    {new:true});
      
     req.session.user = updateUser;
+    //console.log(req.session.user);
     //업데이트가 되지 않는다. 왜? DB에는 적용이 되었으나, 현재 session 이 업데이트 되지 않았으므로
     // 방법 1.
     // req.session.user = {

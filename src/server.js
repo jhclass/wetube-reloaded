@@ -28,7 +28,7 @@ app.use( //세션선언
 );
 app.use((req,res,next)=>{ //세션스토어에 담겨있는 내용을 console.log
     req.sessionStore.all((error,sessions)=>{
-        console.log(sessions);
+        //console.log(sessions);
         
     });
     next();
@@ -37,7 +37,7 @@ app.get("/add-one",(req,res,next)=>{
     res.locals.sexy = "you";
     // add-one 페이지에 세션아이디와 세션안에 생성한 포테이토에 +=1 하여 브라우저마다 세션이 다르게 적용되고 있다는 것을 확인
     req.session.potato += 1;
-    console.log(res);
+    //console.log(res);
     return res.send(`${req.session.id}\n${req.session.potato}`);
     
 });
@@ -48,6 +48,7 @@ app.get("/add-one",(req,res,next)=>{
 //     next();
 // });
 app.use(localsMiddleware);
+app.use("/upload",express.static("upload"));
 app.use("/",rootRouter);
 app.use("/videos",videoRouter);
 app.use("/users",userRounter);
