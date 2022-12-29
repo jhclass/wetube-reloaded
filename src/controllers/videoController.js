@@ -4,7 +4,7 @@ export const home = async(req,res)=>{
   try{
    // console.log("i Started");
     const videos = await Video.find({}).sort({createdAt:"desc"});
-  //  console.log(videos)
+   console.log('aa',videos)
    // console.log("i finish")
     
     return res.render('home',{pageTitle:"HOME",videos});
@@ -20,8 +20,9 @@ export const watch = async(req,res) => {
   if(!video){
     return res.stauts(404).render('404',{pageTitle:"Video not found."});
   }
+  //console.log(video);
+  return res.render('watch',{pageTitle:video.title,video}); //해당아이디에 맞는 비디오정보를 보내줌.
   
-  return res.render('watch',{pageTitle:video.title,video});
 
 };
 
@@ -80,6 +81,9 @@ export const getUpload = (req,res)=>{
 
 
 export const postUpload = async(req,res)=>{
+  //const file=req.file;
+  const {path:fileUrl}=req.file;
+  //console.log(fileUrl);
   const {title, description, hashtags} = req.body;
   try{
   // here we will add a video to the videos array
@@ -87,11 +91,12 @@ export const postUpload = async(req,res)=>{
   await Video.create({
     title,
     description,
+    fileUrl,
     /*createdAt: Date.now(), 스키마에 디폴드로 작성하였기 때문에*/
     hashtags:Video.formatHashtags(hashtags)
     
   });
- 
+  
   return res.redirect("/");
   }catch(err){
   //console.log('에러발생',err);
