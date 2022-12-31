@@ -1,7 +1,8 @@
 mixin video(video)
-    
+    //-썸네일 등록하고 썸네일로 대체
     div
-        video(src="/"+video.fileUrl, width="300") 
+        if video.fileUrl != undefined
+            video(src="/"+video.fileUrl, width="300") 
         h4 
             a(href=`/videos/${video.id}`)=video.title
         p=video.description

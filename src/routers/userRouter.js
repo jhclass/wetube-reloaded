@@ -11,7 +11,7 @@ userRouter.route("/change-password").all(protectorMiddleware).get(getChangePassw
 userRouter.get("/remove",remove);
 userRouter.get("/github/start",publicOnlyMiddleware, startGithubLogin);//가장아래로 내려도 순서는 의미없음.!
 userRouter.get("/github/finish",publicOnlyMiddleware, finishGithubLogin);
-userRouter.get(":id",see);
+userRouter.get("/:id",see);
 
 
 

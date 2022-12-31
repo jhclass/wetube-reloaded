@@ -258,4 +258,10 @@ export const postChangePassword = async (req,res) => {
     return res.redirect("/users/logout");
     
 }
-export const see = (req,res) => res.send("see");
+export const see = async(req,res) => {
+   // console.log(req.params);
+    const {id} = req.params;
+    const user = await User.findById(id);
+    return res.render("./users/profile",{pageTitle:`${user.name}의 Profile`,user});
+    
+}
