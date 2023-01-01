@@ -1,3 +1,4 @@
+import User from "../models/User";
 import Video from "../models/Video";
 
 export const home = async(req,res)=>{
@@ -17,13 +18,13 @@ export const home = async(req,res)=>{
 export const watch = async(req,res) => {
   const {id} = req.params;
   const video = await Video.findById(id);
+  const ownerInfo = await User.findById(video.owner);
   if(!video){
     return res.stauts(404).render('404',{pageTitle:"Video not found."});
   }
   //console.log(video);
-  return res.render('watch',{pageTitle:video.title,video}); //해당아이디에 맞는 비디오정보를 보내줌.
-  
-
+  return res.render('watch',{pageTitle:video.title,video,ownerInfo}); //해당아이디에 맞는 비디오정보를 보내줌.
+ 
 };
 
 export const getEdit = async(req,res) => {
