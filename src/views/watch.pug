@@ -4,10 +4,15 @@ block content
     video(src="/"+video.fileUrl, width="300", controls) 
     p=video.description
     small=video.createdAt 
-    br
-    a(href=`${video.id}/edit`) Edit Video &rarr;
-    br
-    a(href=`${video.id}/delete`) Delete Video &rarr;
+    small=video.owner
+    small=loggedInUser._id
+    //- owner 와 loggedInUSer._id  가 같은가??
+    //- 그럼 이 비디오의 소유자가 아니라면 아래 버튼은 보이면 안된다
+    if video.owner == loggedInUser._id
+        br
+        a(href=`${video.id}/edit`) Edit Video &rarr;
+        br
+        a(href=`${video.id}/delete`) Delete Video &rarr;
     //- if video.views >= 2
     //-     h3 #{video.views} views. 
     //- else 
