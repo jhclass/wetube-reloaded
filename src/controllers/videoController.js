@@ -82,6 +82,9 @@ export const getUpload = (req,res)=>{
 
 export const postUpload = async(req,res)=>{
   //const file=req.file;
+  const {
+    user:{_id}
+  } = req.session;
   const {path:fileUrl}=req.file;
   //console.log(fileUrl);
   const {title, description, hashtags} = req.body;
@@ -92,6 +95,7 @@ export const postUpload = async(req,res)=>{
     title,
     description,
     fileUrl,
+    owner:_id,
     /*createdAt: Date.now(), 스키마에 디폴드로 작성하였기 때문에*/
     hashtags:Video.formatHashtags(hashtags)
     
