@@ -5,7 +5,7 @@ export const home = async(req,res)=>{
   try{
    // console.log("i Started");
     const videos = await Video.find({}).sort({createdAt:"desc"});
-   console.log('aa',videos)
+   // console.log('aa',videos)
    // console.log("i finish")
     
     return res.render('home',{pageTitle:"HOME",videos});
@@ -18,12 +18,12 @@ export const home = async(req,res)=>{
 export const watch = async(req,res) => {
   const {id} = req.params;
   const video = await Video.findById(id);
-  const ownerInfo = await User.findById(video.owner);
+  console.log(video);
   if(!video){
     return res.stauts(404).render('404',{pageTitle:"Video not found."});
   }
   //console.log(video);
-  return res.render('watch',{pageTitle:video.title,video,ownerInfo}); //해당아이디에 맞는 비디오정보를 보내줌.
+  return res.render('watch',{pageTitle:video.title,video}); //해당아이디에 맞는 비디오정보를 보내줌.
  
 };
 
