@@ -1,4 +1,11 @@
 extends ../base 
+include ../mixins/video
 
 block content 
     h1 hello
+    each video in videos
+        +video(video)  
+    else 
+        div 
+            h4 죄송합니다. 비디오를 찾을 수 없습니다. 
+    

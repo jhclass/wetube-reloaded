@@ -6,16 +6,19 @@ block content
         p=video.description
         small=video.createdAt 
     div 
-        small 영상소유자 : #{ownerInfo.name}
+        small 영상소유자 : 
+        a(href=`/users/${video.owner._id}`) #{video.owner.name}
     //-small=video.owner
     //-small=loggedInUser._id
     //- owner 와 loggedInUSer._id  가 같은가??
     //- 그럼 이 비디오의 소유자가 아니라면 아래 버튼은 보이면 안된다
-    if video.owner == loggedInUser._id 
+    if video.owner._id == loggedInUser._id 
         br
         a(href=`${video.id}/edit`) Edit Video &rarr;
         br
         a(href=`${video.id}/delete`) Delete Video &rarr;
+    
+        
     //- if video.views >= 2
     //-     h3 #{video.views} views. 
     //- else 
