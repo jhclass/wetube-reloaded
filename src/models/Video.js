@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-
+//테스트
 
 const videoSchema = new mongoose.Schema({
     title: {type:String,required:true,trim:true, maxLength:80},
